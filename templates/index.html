@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head>  
+		<link rel="icon" href="{{ url_for('static', filename='icons8-alpha-16.png')}}">
 		<meta charset="utf-8">
 		<title> Recommendation System </title>
+		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 	</head>
 	<body>
 		<h2> Recommendation System </h2>
 		<ul>
-		<p> top </p>
-		<p> bottom </p>
-		<p> shoe </p>
+		<p> 
+		top
+		<img alt="top" class="image" src="{{ url_for('static', filename='1.jpg')}}">
+		</p>
+		<p> 
+		bottom
+		<img class="image" src="{{ url_for('static', filename='2.jpg')}}">
+		</p>
+		<p>
+		shoe
+		<img class="image" src="{{ url_for('static', filename='3.jpg')}}">
+		</p>
 		</ul>
 		<footer>
 			<small>&copy; 2019 <a href="https://github.com/JiangYunchao">lll</a></small>
