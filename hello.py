@@ -1,4 +1,4 @@
-from flask import url_for, Flask, render_template
+from flask import url_for, Flask, render_template, redirect, flash, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 import click
@@ -9,7 +9,9 @@ import click
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABSE_URI'] = 'sqlite:////' + os.path.join(app.root_path, 'data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的监控
+app.config['SECRET_KEY'] = 'dev'
 db = SQLAlchemy(app)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,7 +20,7 @@ class User(db.Model):
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(20))
-    img_name = db.Column(db.String(100))
+    #img_name = db.Column(db.String(100))
     index = db.column(db.Integer)
 
 
@@ -31,8 +33,22 @@ def initdb(drop):
     db.create_all()
     click.echo('Initialized database.')  # 输出提示信息
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    db.drop_all()
+    db.create_all()
+    if request.method =="POST":
+        category = request.form.get('category')
+        index = request.form.get('index')
+        if not category or not index or len(index) > 4 or len(category) > 10:
+            flash('Invalid input.')  # 显示错误提示
+            return redirect(url_for('index'))  # 重定向回主页
+        item = Item(category=category, index=index)
+        db.session.add(item)
+        db.session.commit()
+        flash("Item created.")
+        return redirect('https://www.baidu.com')
+
     return render_template('index.html')
 
 @app.route('/user/<name>')
