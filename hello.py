@@ -1,6 +1,36 @@
 from flask import url_for, Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+import os
+import click
+
+
+
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABSE_URI'] = 'sqlite:////' + os.path.join(app.root_path, 'data.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的监控
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(10))
+
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(20))
+    img_name = db.Column(db.String(100))
+    index = db.column(db.Integer)
+
+
+@app.cli.command()  # 注册为命令
+@click.option('--drop', is_flag=True, help='Create after drop.')  # 设置选项
+def initdb(drop):
+    """Initialize the database."""
+    if drop:  # 判断是否输入了选项
+        db.drop_all()
+    db.create_all()
+    click.echo('Initialized database.')  # 输出提示信息
+
 @app.route('/')
 def index():
     return render_template('index.html')
