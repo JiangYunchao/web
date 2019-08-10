@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<button type="button">
+        <img src="{{ url_for('static', filename='1.jpg') }}">
+</button>
+<button type="button">
+        <img src="{{ url_for('static', filename='2.jpg') }}">
+</button>
+<button type="button">
+        <img src="{{ url_for('static', filename='3.jpg') }}">
+</button>
+
+<form method="post">
+        <input type="submit" name="submit_button" value="Confirm">
+        <input type="submit" name="submit_button" value="Next">
+
+{% endblock %}
+

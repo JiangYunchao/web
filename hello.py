@@ -82,7 +82,7 @@ def index():
         db.session.add(item)
         db.session.commit()
         flash("Item created.")
-        return redirect('https://www.baidu.com')
+        return redirect(url_for('index'))
 
     return render_template('index.html')
 

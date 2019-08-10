@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>  
+		<link rel="icon" href="{{ url_for('static', filename='icons8-alpha-16.png')}}">
+		<meta charset="utf-8">
+		<title> Recommendation System </title>
+		<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+	</head>
+	<body>
+		{% for message in get_flashed_messages() %}
+		<div class="alert">{{ message }}</div>
+		{% endfor %}
+		<h2> Recommendation System </h2>
+		<form method='post'>
+			Category <input type="text" name="category" required>
+			Id <input type="text" name="index" required>
+			<input class="btn" type="submit" name="submit" value="choose">
+		</form>
+		<ul>
+		<li> 
+		top
+		<img alt="top" class="image" src="{{ url_for('static', filename='1.jpg')}}">
+		</li>
+		<li> 
+		bottom
+		<img class="image" src="{{ url_for('static', filename='2.jpg')}}">
+		</li>
+		<li>
+		shoe
+		<img class="image" src="{{ url_for('static', filename='3.jpg')}}">
+		</li>
+		</ul>
+		<footer>
+			<small>&copy; 2019 <a href="https://github.com/JiangYunchao">lll</a></small>
+		</footer>
+	</body>
+</html>
+	
+
