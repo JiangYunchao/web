@@ -1,18 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<button type="button">
-        <img src="{{ url_for('static', filename='1.jpg') }}">
-</button>
-<button type="button">
-        <img src="{{ url_for('static', filename='2.jpg') }}">
-</button>
-<button type="button">
-        <img src="{{ url_for('static', filename='3.jpg') }}">
-</button>
-
-<form method="post">
-        <input type="submit" name="submit_button" value="Confirm">
-        <input type="submit" name="submit_button" value="Next">
-
+{% for message in get_flashed_messages() %}
+        <div class="alert">{{ message }}</div>
+{% endfor %}
+<div class="choose">
+        <form method="post">
+                <input type="radio" name="img1">
+                <button type="button">
+                        <img src="{{ url_for('static', filename='1.jpg') }}" width="200" height="400">
+                </button>
+                <input type="radio" name="img2">
+                <button type="button">
+                        <img src="{{ url_for('static', filename='2.jpg') }}" width="200" height="400">
+                </button>
+                <input type="radio" name="img3">
+                <button type="button">
+                        <img src="{{ url_for('static', filename='3.jpg') }}" width="200" height="400">
+                </button>
+                <br/>
+                <br/>
+                <br/>
+                <p>
+                <input style="font-size:25px;font-family:verdana" type="submit" name="submit_button" value="Confirm">
+                &emsp;&emsp;&emsp;
+                <input style="font-size:25px;font-family:verdana" type="submit" name="submit_button" value="Next">
+                </p>
+        </form>
+</div>
 {% endblock %}
 
