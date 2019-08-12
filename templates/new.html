@@ -5,15 +5,15 @@
 {% endfor %}
 <div class="choose">
         <form method="post">
-                <input type="radio" name="img1">
+                <input type="checkbox" name="img" value="1">
                 <button type="button">
                         <img src="{{ url_for('static', filename='1.jpg') }}" width="200" height="400">
                 </button>
-                <input type="radio" name="img2">
+                <input type="checkbox" name="img" value="1">
                 <button type="button">
                         <img src="{{ url_for('static', filename='2.jpg') }}" width="200" height="400">
                 </button>
-                <input type="radio" name="img3">
+                <input type="checkbox" name="img" value="1">
                 <button type="button">
                         <img src="{{ url_for('static', filename='3.jpg') }}" width="200" height="400">
                 </button>
@@ -21,7 +21,8 @@
                 <br/>
                 <br/>
                 <p>
-                <input style="font-size:25px;font-family:verdana" type="submit" name="submit_button" value="Confirm">
+                <input style="font-size:25px;font-family:verdana" id="btnOperate" type="button"  value="Confirm" onclick="static_num()" />
+                <!--<input style="font-size:25px;font-family:verdana" type="submit" name="submit_button" value="Confirm">-->
                 &emsp;&emsp;&emsp;
                 <input style="font-size:25px;font-family:verdana" type="submit" name="submit_button" value="Next">
                 </p>

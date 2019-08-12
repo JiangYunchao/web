@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script type="text/JavaScript">
+		function static_num()
+		{
+			document.getElementById("btnOperate").onclick = function () {
+				var arr = new Array();
+				var items = document.getElementsByName("img");
+				for (i = 0; i < items.length; i++) {
+					if (items[i].checked) {
+						arr.push(items[i].value);
+					}
+				}
+				alert("选择的个数为：" + arr.length);
+			};
+		};
+		</script>
 		{% block head %}
 		<link rel="icon" href="{{ url_for('static', filename='icons8-alpha-16.png')}}">
 		<meta charset="utf-8">
@@ -23,6 +38,15 @@
 		.choose{
 			text-align:center;
 
+		}
+
+		.result{
+			text-align:center;
+			height:600px;
+			width:100%;
+			line-height:550px;
+			font-size:30px;
+			font-family:verdana;
 		}
 		#footer {
 			background-color:black;
