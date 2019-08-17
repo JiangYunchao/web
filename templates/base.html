@@ -16,6 +16,8 @@
 			};
 		};
 		</script>
+
+
 		{% block head %}
 		<link rel="icon" href="{{ url_for('static', filename='icons8-alpha-16.png')}}">
 		<meta charset="utf-8">
@@ -23,6 +25,43 @@
 		<title> Recommendation System </title>
 
 		<style type="text/css">
+
+		.main{
+			text-align:center;
+			height:750px;
+		}
+
+		.outfit{
+			width:400px;
+			margin:30px auto;
+			border:solid 1px;
+			overflow:hidden;
+			float:left;
+			margin-left:45px;
+		}
+		.outfit div{
+			width:100px;
+			height:100px;
+			/*border:solid 1px gray;*/
+			float:left;
+			margin-left:25px;
+			text-align:center;
+		}
+		.outfit div img{
+			display:block;
+			width:auto;
+			height:auto;
+			max-width:100%;
+			max-height:100%;
+		}
+
+
+		.main .btn{
+			position:absolute;
+			bottom:100px;
+			left:45%;
+		}
+
 		#header {
 			background-color:black;
 			color:white;
@@ -30,14 +69,19 @@
 			padding:5px;
 		}
 		.mainpage_btn {
-			height:600px;
+			position:absolute;
+			bottom:500px;
 			width:100%;
-			line-height:550px;
 			text-align:center;
+		}
+		.after_confirm_btn{
+			position:absolute;
+			bottom:450px;
+			left:35%;
 		}
 		.choose{
 			text-align:center;
-
+			height:750px;
 		}
 
 		.result{
@@ -54,6 +98,9 @@
 			clear:both;
 			text-align:center;
 		    padding:5px;
+			position:absolute;
+			bottom:0;
+			width:100%;
 		}
 
 		</style>
