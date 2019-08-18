@@ -101,41 +101,55 @@ def new_user():
 
     return render_template('new.html', oft_list=oft_dict)
 
-@app.route('/after_confirm/<id>', methods=['GET', 'POST'])
+@app.route('/after_confirm_exist/<id>', methods=['GET', 'POST'])
 def after_confirm_exist(id):
     if request.method == "POST":
         if request.form['submit_button'] == "Top-n Recommendation":
             return redirect(url_for('topn_exist', id=id))
         else:
-            return redirect(url_for('itemRec_exist', id=id))
+            return redirect(url_for('cate_choose', id=id))
 
     return render_template('after_confirm.html')
 
 
-@app.route('/after_confirm/<id>', methods=['GET', 'POST'])
+@app.route('/after_confirm_new/<id>', methods=['GET', 'POST'])
 def after_confirm_new(id):
     if request.method == "POST":
         if request.form['submit_button'] == "Top-n Recommendation":
             return redirect(url_for('topn_new', id=id))
         else:
-            return redirect(url_for('itemRec_new', id=id))
+            return redirect(url_for('cate_choose', id=id))
 
     return render_template('after_confirm.html')
 
 
-@app.route('/topn/<id>')
+@app.route('/topn_exist/<id>')
 def topn_exist(id):
     result_list = []
     result_list.append(oft_list[int(id)])
     return render_template("topn.html", id_list=result_list)
 
-@app.route('/itemRec/<id>')
-def itemRec_exist(id):
-    result_list = []
-    result_list.append(oft_list[int(id)])
-    return render_template('itemRec.html', id_list=result_list)
-    
-@app.route('/topn/<id>')
+@app.route('/itemRec_exist/<id>', methods=['POST', 'GET'])
+def cate_choose(id):
+    if request.method == "POST":
+        cate = request.form['category']
+        value = id + '-' + cate
+        return redirect(url_for('item_show', value=value))
+    # result_list = []
+    # result_list.append(oft_list[int(id)])
+    return render_template('itemRec.html', id_list=id)
+
+@app.route('/item_show/<value>')
+def item_show(value):
+    id = value.split('-')[:-1]
+    if len(id) > 1:
+        id = id[1:]
+    cate = value.split('-')[-1]
+    return render_template('itemShow.html', id=id, cate=cate)
+
+
+
+@app.route('/topn_new/<id>')
 def topn_new(id):
     rcv = id.split('-')
     id_list = rcv[1:]
@@ -144,11 +158,12 @@ def topn_new(id):
         result_list.append(oft_list[int(i)])
     return render_template("topn.html", id_list=result_list)
 
-@app.route('/itemRec/<id>')
-def itemRec_new(id):
-    rcv = id.split('-')
-    id_list = rcv[1:]
-    result_list = []
-    for i in id_list:
-        result_list.append(oft_list[int(i)])
-    return render_template('itemRec.html', id_list=result_list)
+# @app.route('/itemRec_new/<id>')
+# def itemRec_new(id):
+#     rcv = id.split('-')
+#     id_list = rcv[1:]
+#     print(id_list)
+#     result_list = []
+#     for i in id_list:
+#         result_list.append(oft_list[int(i)])
+#     return render_template('itemRec.html', id_list=result_list)
