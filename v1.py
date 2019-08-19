@@ -91,7 +91,7 @@ def new_user():
             for s in s_option:
                 temp = "-" + s
                 value += temp
-            return redirect(url_for('after_confirm_new', id=value))
+            return redirect(url_for('new_user_preference', id=value))
 
         elif request.form['submit_button'] == "New":
 
@@ -100,6 +100,41 @@ def new_user():
             return redirect(url_for('new_user'))
 
     return render_template('new.html', oft_list=oft_dict)
+
+@app.route('/new_user_preference/<id>', methods=['GET', 'POST'])
+def new_user_preference(id):
+    id_list = id.split('-')[1:]
+    #calculate new user vector
+    ofts = random.sample(oft_list_copy, 12)
+    oft_dict = []
+    #  添加判断剩余outfit数目是否小于可显示数目的code
+    for n, oft in enumerate(ofts):
+        # oft = oft.strip()
+        # oft = oft.split(',')
+        oft[1] = '/static/top/' + oft[1]
+        oft[2] = '/static/bottom/' + oft[2]
+        oft[3] = '/static/shoe/' + oft[3]
+        id = int(oft[-1])
+
+        oft_dict.append({"user":oft[0], "id":oft[4], "top":oft[1],
+                         "bottom":oft[2], "shoe":oft[3]})
+
+    if request.method == "POST":
+        if request.form['submit_button'] == "Confirm":
+            # print(imgName)
+            # value = imgName.split('/')[-1]
+            value = request.values.get("img")
+
+            return redirect(url_for('after_confirm_new', id=id))
+
+        elif request.form['submit_button'] == "New":
+
+            # return render_template('exist.html', imgName=imgName)
+            # flash("Change New Item.")
+            return redirect(url_for('new_user_preference', id=id))
+
+    return render_template('new_user_preference.html', oft_list=oft_dict)
+
 
 @app.route('/after_confirm_exist/<id>', methods=['GET', 'POST'])
 def after_confirm_exist(id):

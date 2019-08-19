@@ -6,6 +6,7 @@
 	<div class="alert">{{ message }}</div>
 {% endfor %}
 <div class="main">
+
 	<form method="post">
 		{% for oft in oft_list %}
 			<div class="outfit" >
@@ -26,20 +27,5 @@
 			<input style="font-size:25px;font-family:verdana" type="submit" name="submit_button" value="New" />
 		</p>
 	</form>
-
-<script type="text/javascript">
-var isDefualtAdd = 0; //0不选中，1选中
-
-$('input:radio').click(function(){
-	var $radio = $(this);
-	if ($radio.data('waschecked') == true){
-		$radio.prop('checked', false); $radio.data('waschecked', false);
-		isDefualtAdd = 0;
-	} else {
-		$radio.prop('checked', true); $radio.data('waschecked', true);
-		isDefualtAdd = 1;
-	}
-});
-</script>
 </div>
 {% endblock %}
