@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = 'dev'
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)  # 实例化扩展类
 
-f = open('/home/jiang/web/static/test_posi_20190816')
+f = open('./static/test_posi_20190816')
 oft_list = f.readlines()
 for n, oft in enumerate(oft_list):
     oft = oft.strip()
